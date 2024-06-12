@@ -13,6 +13,18 @@ public:
 		pass = p;
 		count = c;
 	}
+    void addName(string n){
+        name = n;
+    }
+    void addTel(string n){
+        sdt = n;
+    }
+    void addMail(string n){
+        mail = n;
+    }
+    void addPass(string n){
+        pass = n;
+    }
 	void signup(cus& a){          //ham dang ky cho khach hang
 		cin>> a;
 		cout<< a;
@@ -29,9 +41,11 @@ public:
 	}
 
 	void menu(cus& a){			//menu khach hang
-		while(1){
+		int i = 0;
+        while(1){
 			cout<<"1. Xem thong tin khach hang." << endl;
 			cout<<"2. Chinh sua thong tin tai khoan." << endl;  
+            cout<<"3. Mua hang." << endl;
 			cout<<"An phim tuong ung voi chuc nang:" << endl;
 			cin>> i; 
 		}
@@ -39,13 +53,19 @@ public:
 
 	void edit(cus& a){         		//ham chinh sua thong tin (them vao menu cho cua khach hang sau khi dang nhap) 
 		int j = 0;
+        string n = "A";
 		cout<<"1. Doi ten." << endl;
 		cout<<"2. Doi email." << endl;  
 		cout<<"3. Doi email." << endl;  
 		cout<<"4. Doi mat khau." << endl;
 		cout<<"An phim tuong ung voi chuc nang:" << endl;
 		cin>> j;
-		if
+		if(j == 1){
+            cout<<"Nhap ten moi: ";
+            getline(cin, n);
+            addName(n);
+
+        }
 	}
 
 	friend class order;
