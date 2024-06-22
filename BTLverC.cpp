@@ -91,7 +91,7 @@ void nhapDanhSachSanPham(AD sp[], int &n){
 
     }
 };
-//Hàm xuất danh sách sinh viên 
+//Hàm xuất danh sách sản phẩm 
 void xuatDanhSachSanPham(AD sp[], int n){
     printf("\n");
     printf("\n%5s \t %15s \t %10s \t %10s \t %8s \t %8s \t %10s","Ma", "Ten san pham", "Gia nhap san pham (VND)", "Gia ban san pham (VND)","Ngay san xuat", "Han su dung", "Danh muc");
