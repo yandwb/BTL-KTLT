@@ -1,6 +1,10 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
+
+fstream f;
+istream in;
 
 class cus{       //class khach hang
 	string name, sdt, mail, pass;
@@ -27,17 +31,29 @@ public:
     }
 	void signup(cus& a){          //ham dang ky cho khach hang
 		cin>> a;
+		f.open("ttcus.txt", ios::app);
+		f<< a.name << endl;
+		f<< a.sdt << endl;
+		f<< a.mail << endl;
+		f<< a.pass << endl;
+		f.close();
 		cout<< a;
 	}
-	void login(){           //ham dang nhap cho khach hang
+	void login(cus& a){           //ham dang nhap cho khach hang
 		string user, mk;
+		cin.ignore();
 		cout<<"Nhap email hoac so dien thoai: ";
 		getline(cin, user);
 		cout<<"Nhap mat khau: ";
 		getline(cin, mk);
-		if(){                     //neu thong tin dang nhap dung
-
+		in.open("ttcus.txt");
+		if(((((in<< a.sdt;) || (in<< a.mail;)) == user) || (((in<< a.sdt;) || (in<< a.mail;) == user)) && (in<< a.pass;) == mk){                     //neu thong tin dang nhap dung
+			menu(cus &a);
 		}
+		else{
+			cout<< "Tai khoan va mat khau sai."
+		}
+		in.close();
 	}
 
 	void menu(cus& a){			//menu khach hang
@@ -48,36 +64,70 @@ public:
             cout<<"3. Mua hang." << endl;
 			cout<<"An phim tuong ung voi chuc nang:" << endl;
 			cin>> i; 
+			if(i == 1){
+				cout<< a;
+			}
+			if(i == 2){
+				edit(a);
+			}
+			if(i == 3){
+				                                      //chuyen den trang mua hang
+			}
 		}
 	}
 
 	void edit(cus& a){         		//ham chinh sua thong tin (them vao menu cho cua khach hang sau khi dang nhap) 
 		int j = 0;
         string n = "A";
-		cout<<"1. Doi ten." << endl;
-		cout<<"2. Doi email." << endl;  
-		cout<<"3. Doi email." << endl;  
-		cout<<"4. Doi mat khau." << endl;
-		cout<<"An phim tuong ung voi chuc nang:" << endl;
-		cin>> j;
-		if(j == 1){
-            cout<<"Nhap ten moi: ";
-            getline(cin, n);
-            addName(n);
-
-        }
+		char confirm = 'K';
+		do{
+			cout<<"1. Doi ten." << endl;
+			cout<<"2. Doi so dien thoai." << endl;  
+			cout<<"3. Doi email." << endl;  
+			cout<<"4. Doi mat khau." << endl;
+			cout<<"An phim tuong ung voi chuc nang:" << endl;
+			cin>> j;
+			if(j == 1){
+				cout<<"Nhap ten moi: ";
+				getline(cin, n);
+				addName(n);
+				f.open("ttcus.txt", ios::app);
+				f<< n << endl;
+				f.close();
+			}
+			if(j == 2){
+				cout<<"Nhap so dien thoai moi: ";
+				getline(cin, n);
+				addTel(n);
+				f.open("ttcus.txt", ios::app);
+				f<< n << endl;
+				f.close();
+			}
+			if(j == 3){
+				cout<<"Nhap email moi: ";
+				getline(cin, n);
+				addMail(n);
+				f.open("ttcus.txt", ios::app);
+				f<< n << endl;
+				f.close();
+			}
+			if(j == 4){
+				cout<<"Nhap mat khau moi: ";
+				getline(cin, n);
+				addPass(n);
+				f.open("ttcus.txt", ios::app);
+				f<< n << endl;
+				f.close();
+			}
+			cout<<"Quy khach muon tiep tuc chinh sua thong tin khong? C/K";
+			cin>> confirm;
+		}
+		while(confirm == 'C' || confirm == 'c');
 	}
 
 	friend class order;
 	friend ostream& operator<<(ostream& os, const cus& a);      // ham dang ky thong tin
 	friend istream& operator>>(istream& is, cus& a);            //ham hien thong tin khach hang
-};
-
-class order{                 //thong ke so luong don hang nam trong class san pham
-	/*...........*/
-	int count;
-public: 
-	order(/*....*/);
 };
 
 ostream& operator<<(ostream& os, const cus& a){
@@ -91,13 +141,13 @@ ostream& operator<<(ostream& os, const cus& a){
 
 istream& operator>>(istream& is, cus& a){
 	cout<<"Nhap ten cua quy khach: ";
-	getline(cin, a.name);
+	getline(is, a.name);
 	cout<<"Nhap so dien thoai cua quy khach: ";                                       // loai bo ky tu enter con thua
-	getline(cin, a.sdt);
+	getline(is, a.sdt);
 	cout<<"Nhap mail cua quy khach: ";
-	getline(cin, a.mail);
+	getline(is, a.mail);
 	cout<<"Nhap mat khau cua quy khach: ";
-	getline(cin, a.pass);
+	getline(is, a.pass);
 	return is;
 }
 
