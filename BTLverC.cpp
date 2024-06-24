@@ -112,7 +112,6 @@ void timKiemSanPhamTheoTen(AD sp[], int n, char ten[]) {
         printf("\nKhong co san pham nao co ten \"%s\" trong danh sach.\n", ten);
     }
 }
-
 //Hàm tìm kiếm sản phẩm theo mã
 void timKiemSanPhamTheoMa(AD sp[], int n, char ma[]) {
     int timThay = 0;
@@ -126,8 +125,6 @@ void timKiemSanPhamTheoMa(AD sp[], int n, char ma[]) {
         printf("\nKhong co san pham nao mang ma \"%s\" trong danh sach.\n", ma);
     }
 }
-
-
 // Hàm tìm kiếm sản phẩm theo danh mục
 void timKiemSanPhamTheoDanhMuc(AD sp[], int n, char danhMuc[]) {
     int timThay = 0; // Biến kiểm tra xem có sản phẩm nào thỏa mãn không
