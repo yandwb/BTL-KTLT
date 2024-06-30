@@ -109,11 +109,12 @@ public:
 		os<<setw(15)<<left<<sp.danhMuc;
 		return os;
 	}	
+	//ghi san pham vao file
 	friend ofstream& operator<<(ofstream& ofs, const SanPham& sp){
 			ofs<<sp.ma<<","<<sp.ten<<","<<sp.giaNhap<<","<<sp.giaBan<<","<<sp.ngaySX<<","<<sp.hanSD<<","<<sp.danhMuc<<"."<<endl;
 			return ofs;
 	}
-	
+	//doc san pham tu file
 	friend ifstream& operator>>(ifstream& ifs, SanPham& sp) {
 	    getline(ifs, sp.ma, ',');
 	    getline(ifs, sp.ten, ',');
@@ -153,6 +154,13 @@ public:
 	void set_soLuongNhap(int _soLuongNhap){
 		soLuongNhap=_soLuongNhap;
 	}
+	//Tinh tong tien lai thu duoc
+	double LaiThuDuoc(){
+		double _LaiThu;
+		_LaiThu=soLuongBan*(giaBan-giaNhap);
+		return _LaiThu;
+	}
+	
 	//friend class DSSP;
 };
 //lop danh sach san pham
@@ -165,6 +173,9 @@ public:
 		data = new SanPham[n];
 		for (int i=0; i<n ;i++)
 			data[i]=_d;
+	}
+	int getSoLuongSP(){
+		return n;
 	}
 	//ham nhap danh sach san pham
 	friend istream& operator>>(istream& is,DSSP& ds){
@@ -204,6 +215,7 @@ public:
 		for (int i=0;i<ds.n;i++)
 			ifs>>ds.data[i];
 	}
+	//ham Nhap them san pham
 	void ThemSP(int add){
 		int d;
 		n+=add;
@@ -217,6 +229,7 @@ public:
 		}
 		ifs.close();
 	}
+	//ham Xoa San Pham
 	void XoaSP(int del){
 		ofstream ofs("DS_SANPHAM.txt");
 		ofs.clear();
@@ -270,24 +283,32 @@ public:
 	        cout<<"\nKhong co san pham nao co ma "<<_danhMuc<<" trong danh sach.\n";
 	    }
 	}
-    //Nhap so luong san pham ban ra
+    //Nhap so luong san pham ban ra tu file
   	void NhapSoLuongBan(){
+  		ofstream ofs("SOLUONGBANRA.txt");
   		for (int i=0;i<n;i++)
   		{	
   			int _soLuongBan;
   			cout<<"Nhap so luong ban ra cua san pham "<<data[i].getName() <<" ";
   			cin>>_soLuongBan;
   			data[i].set_soLuongBan(_soLuongBan);
+  			ofs<<data[i].get_soLuongBan()<<endl;
   		}
+  		ofs.close();
 	  }
-
-	double TongLaiThuDuoc(){
-		double _tongThu=0;
+	
+	//Tinh tien lai thu duoc cua tung san pham
+	void LaiTungSP(){
+		ifstream ifs("SOLUONGBANRA.txt");
 		for (int i=0;i<n;i++)
-		{
-		_tongThu+=(data[i].get_soLuongBan())*(data[i].get_giaBan()-data[i].get_giaNhap());
+		{	
+  			int _soLuongBan;
+  			ifs>>_soLuongBan;
+  			cout<<"So luong ban ra cua san pham "<<data[i].getName() <<" la:"<<_soLuongBan<<endl;
+  			data[i].set_soLuongBan(_soLuongBan);
+			cout<<"Lai cua san pham "<<data[i].getName() <<" la:"<<data[i].LaiThuDuoc()<<endl;
 		}
-		return _tongThu;
+		ifs.close();
 	}
 	void sapXepTheoGiaBan() {
 	    for (int i = 0; i < n - 1; i++) {
@@ -331,15 +352,8 @@ public:
 	}
 };
 
-int main(){
-	
-	/*int n;
-	ifs>>n;
-	ifs.ignore();
-    //cout<<"\nNhap so luong san pham: ";
-    SanPham* sp=new SanPham[n];
-    for (int i=0;i<n;i++) ifs>>sp[i];  */  
-    int choose;
+void menuAdmin(){
+	int choose;
 	do {
 		ifstream ifs("DS_SANPHAM.txt");
 		DSSP sp;
@@ -352,9 +366,10 @@ int main(){
         cout << "\n4. Tim kiem san pham theo ma ";
         cout << "\n5. Tim kiem san pham theo danh muc ";
         cout << "\n6. Xoa san pham tu danh sach";
-        cout << "\n7. Loi nhuan thu duoc ";
+        cout << "\n7. Loi nhuan thu duoc cua tung san pham ";
         cout << "\n8. Sap xep danh sach san pham theo gia ban ";
         cout << "\n9. Sap xep danh sach san pham theo gia nhap ";
+        cout << "\n10. Nhap so luong san pham ban ra. ";
         cout << "\n0. Thoat ";
         cout << "\n================================================";
         cout << "\n";
@@ -409,8 +424,7 @@ int main(){
 				break;
 			}
 			case 7:{
-				sp.NhapSoLuongBan();
-				cout<<"Loi nhuan: "<<sp.TongLaiThuDuoc()<<" (VND)";
+				sp.LaiTungSP();
 				break;
 			}
 			case 8:{
@@ -421,7 +435,10 @@ int main(){
 				sp.sapXepTheoGiaNhap();
 				break;
 			}
-		
+			case 10:{
+				sp.NhapSoLuongBan();
+				break;
+			}
             case 0:{
 				cout << "Thoat chuong trinh.";
                 break;
@@ -431,4 +448,28 @@ int main(){
     	}
     	ifs.close();
     } while (choose != 0);  
+	
+}
+void menuCustom(){
+	
+}
+int main(){
+	int chon;
+	cout << "======= Ban la =======";
+	cout << "\n1. Nguoi quan ly.  ";
+    cout << "\n2. Khach hang. ";
+	cout << "\n======================"<<endl;
+	cin>>chon;
+	switch(chon){
+		case 1:{
+			menuAdmin();
+			break;
+		}
+		case 2:{
+			menuCustom();
+			break;
+		}
+		default:
+                cout << "Lua chon khong hop le. Vui long nhap lai." << endl;
+	}
 }
