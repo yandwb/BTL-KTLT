@@ -7,25 +7,24 @@ fstream f;
 istream in;
 
 class cus{       //class khach hang
-	string name, sdt, mail, pass;
+	string name, sdt, pass;
 	int count;     //dem so san pham da mua
 public:
-	cus(string n = "A", string s = "A", string m = "A", string p = "A", int c = 0){            //ham tao
+	cus(string n = "A", string s = "A", string p = "A", int c = 0){            //ham tao
 		name = n;
 		sdt = s;
-		mail = m;
 		pass = p;
 		count = c;
 	}
+	string getName()const{ return name;}
     void addName(string n){
         name = n;
     }
+	string getTel()const{ return sdt;}
     void addTel(string n){
         sdt = n;
     }
-    void addMail(string n){
-        mail = n;
-    }
+	string getPass()const{ return pass;}
     void addPass(string n){
         pass = n;
     }
@@ -34,7 +33,6 @@ public:
 		f.open("ttcus.txt", ios::app);
 		f<< a.name << endl;
 		f<< a.sdt << endl;
-		f<< a.mail << endl;
 		f<< a.pass << endl;
 		f.close();
 		cout<< a;
@@ -42,18 +40,10 @@ public:
 	void login(cus& a){           //ham dang nhap cho khach hang
 		string user, mk;
 		cin.ignore();
-		cout<<"Nhap email hoac so dien thoai: ";
+		cout<<"Nhap so dien thoai: ";
 		getline(cin, user);
 		cout<<"Nhap mat khau: ";
 		getline(cin, mk);
-		in.open("ttcus.txt");
-		if(((((in<< a.sdt;) || (in<< a.mail;)) == user) || (((in<< a.sdt;) || (in<< a.mail;) == user)) && (in<< a.pass;) == mk){                     //neu thong tin dang nhap dung
-			menu(cus &a);
-		}
-		else{
-			cout<< "Tai khoan va mat khau sai."
-		}
-		in.close();
 	}
 
 	void menu(cus& a){			//menu khach hang
@@ -82,9 +72,8 @@ public:
 		char confirm = 'K';
 		do{
 			cout<<"1. Doi ten." << endl;
-			cout<<"2. Doi so dien thoai." << endl;  
-			cout<<"3. Doi email." << endl;  
-			cout<<"4. Doi mat khau." << endl;
+			cout<<"2. Doi so dien thoai." << endl;    
+			cout<<"3. Doi mat khau." << endl;
 			cout<<"An phim tuong ung voi chuc nang:" << endl;
 			cin>> j;
 			if(j == 1){
@@ -104,14 +93,6 @@ public:
 				f.close();
 			}
 			if(j == 3){
-				cout<<"Nhap email moi: ";
-				getline(cin, n);
-				addMail(n);
-				f.open("ttcus.txt", ios::app);
-				f<< n << endl;
-				f.close();
-			}
-			if(j == 4){
 				cout<<"Nhap mat khau moi: ";
 				getline(cin, n);
 				addPass(n);
@@ -131,10 +112,9 @@ public:
 };
 
 ostream& operator<<(ostream& os, const cus& a){
-	os << "Ten: " << a.name << "\n";
-	os << "So dien thoai: " << a.sdt << "\n";
-	os << "Email: " << a.mail << "\n";
-	os << "Mat khau: " << a.pass << "\n";
+	os << "Ten: " << a.getName << "\n";
+	os << "So dien thoai: " << a.getTel << "\n";
+	os << "Mat khau: " << a.getPass << "\n";
 	os << "San pham da mua: " << a.count << "\n";
 	return os;
 }
@@ -144,8 +124,6 @@ istream& operator>>(istream& is, cus& a){
 	getline(is, a.name);
 	cout<<"Nhap so dien thoai cua quy khach: ";                                       // loai bo ky tu enter con thua
 	getline(is, a.sdt);
-	cout<<"Nhap mail cua quy khach: ";
-	getline(is, a.mail);
 	cout<<"Nhap mat khau cua quy khach: ";
 	getline(is, a.pass);
 	return is;
