@@ -195,9 +195,9 @@ public:
 		os<<setw(15)<<left<<"Ten san pham"<<"\t";
 		os<<setw(20)<<left<<"Gia nhap san pham(VND)"<<"\t";
 		os<<setw(20)<<left<<"Gia ban san pham(VND)"<<"\t";
-		os<<setw(20)<<left<<"Ngay san xuat"<<"\t";
-		os<<setw(20)<<left<<"Han su dung"<<"\t";
-		os<<setw(15)<<left<<"Danh Muc"<<endl;
+		os<<setw(25)<<left<<"Ngay san xuat"<<"\t";
+		os<<setw(25)<<left<<"Han su dung"<<"\t";
+		os<<setw(20)<<left<<"Danh Muc"<<endl;
 		for (int i=0;i<ds.n;i++)
 			os<<ds.data[i]<<endl;
 		return os;
@@ -243,6 +243,13 @@ public:
     }
     friend class SanPham;
     void timKiemSanPhamTheoTen(const string _ten) {
+    	cout<<setw(5)<<left<<"Ma"<<"\t";
+		cout<<setw(15)<<left<<"Ten san pham"<<"\t";
+		cout<<setw(20)<<left<<"Gia nhap san pham(VND)"<<"\t";
+		cout<<setw(20)<<left<<"Gia ban san pham(VND)"<<"\t";
+		cout<<setw(25)<<left<<"Ngay san xuat"<<"\t";
+		cout<<setw(25)<<left<<"Han su dung"<<"\t";
+		cout<<setw(15)<<left<<"Danh Muc"<<endl;
 	    int timThay = 0; 
 	    for (int i = 0; i < n; i++) {
 	    	string s=data[i].getName();
@@ -257,6 +264,13 @@ public:
 	}
 	//Hàm tìm ki?m s?n ph?m theo mã
 	void timKiemSanPhamTheoMa(const string _ma) {
+		cout<<setw(5)<<left<<"Ma"<<"\t";
+		cout<<setw(15)<<left<<"Ten san pham"<<"\t";
+		cout<<setw(20)<<left<<"Gia nhap san pham(VND)"<<"\t";
+		cout<<setw(20)<<left<<"Gia ban san pham(VND)"<<"\t";
+		cout<<setw(25)<<left<<"Ngay san xuat"<<"\t";
+		cout<<setw(25)<<left<<"Han su dung"<<"\t";
+		cout<<setw(15)<<left<<"Danh Muc"<<endl;
 	    int timThay = 0;
 	    for (int i = 0; i < n; i++) {
 	    	string s=data[i].getID();
@@ -271,6 +285,13 @@ public:
 	}
 		//tim kiem theo danh muc
 	void timKiemSanPhamTheoDanhMuc(const string _danhMuc ){
+		cout<<setw(5)<<left<<"Ma"<<"\t";
+		cout<<setw(15)<<left<<"Ten san pham"<<"\t";
+		cout<<setw(20)<<left<<"Gia nhap san pham(VND)"<<"\t";
+		cout<<setw(20)<<left<<"Gia ban san pham(VND)"<<"\t";
+		cout<<setw(25)<<left<<"Ngay san xuat"<<"\t";
+		cout<<setw(25)<<left<<"Han su dung"<<"\t";
+		cout<<setw(15)<<left<<"Danh Muc"<<endl;
 	    int timThay = 0;
 	    for (int i = 0; i < n; i++) {
 	    	string s=data[i].getDanhMuc();
@@ -324,8 +345,8 @@ public:
 		cout<<setw(15)<<left<<"Ten san pham"<<"\t";
 		cout<<setw(20)<<left<<"Gia nhap san pham(VND)"<<"\t";
 		cout<<setw(20)<<left<<"Gia ban san pham(VND)"<<"\t";
-		cout<<setw(20)<<left<<"Ngay san xuat"<<"\t";
-		cout<<setw(20)<<left<<"Han su dung"<<"\t";
+		cout<<setw(25)<<left<<"Ngay san xuat"<<"\t";
+		cout<<setw(25)<<left<<"Han su dung"<<"\t";
 		cout<<setw(15)<<left<<"Danh Muc"<<endl;
 	    for (int i=0; i<n ;i++)
 	    	cout<<data[i];
@@ -344,14 +365,26 @@ public:
 		cout<<setw(15)<<left<<"Ten san pham"<<"\t";
 		cout<<setw(20)<<left<<"Gia nhap san pham(VND)"<<"\t";
 		cout<<setw(20)<<left<<"Gia ban san pham(VND)"<<"\t";
-		cout<<setw(20)<<left<<"Ngay san xuat"<<"\t";
-		cout<<setw(20)<<left<<"Han su dung"<<"\t";
+		cout<<setw(25)<<left<<"Ngay san xuat"<<"\t";
+		cout<<setw(25)<<left<<"Han su dung"<<"\t";
 		cout<<setw(15)<<left<<"Danh Muc"<<endl;
 	    for (int i=0; i<n ;i++)
 	    	cout<<data[i];
 	}
 };
-
+bool MatKhauAdmin(){
+	string pass,check;
+	cout<<"Nhap mat khau:";
+	cin>>pass;
+	ifstream ifs("MATKHAUAD.txt");
+	getline(ifs,check);
+	ifs.close();
+	if (pass==check) return true;
+	else {
+		cout<<"Mat khau sai."<<endl;
+		return false;
+	}
+}
 void menuAdmin(){
 	int choose;
 	do {
@@ -440,7 +473,7 @@ void menuAdmin(){
 				break;
 			}
             case 0:{
-				cout << "Thoat chuong trinh.";
+				cout << "Thoat chuong trinh."<<endl;
                 break;
 			}    
             default:
@@ -455,21 +488,28 @@ void menuCustom(){
 }
 int main(){
 	int chon;
-	cout << "======= Ban la =======";
-	cout << "\n1. Nguoi quan ly.  ";
-    cout << "\n2. Khach hang. ";
+	do{
+	cout << "======= Ban muon =======";
+	cout << "\n1. Quan ly .  ";
+    cout << "\n2. Ban hang. ";
+    cout << "\n0. Thoat ";
 	cout << "\n======================"<<endl;
 	cin>>chon;
 	switch(chon){
 		case 1:{
-			menuAdmin();
+			if (MatKhauAdmin()) menuAdmin();
 			break;
 		}
 		case 2:{
 			menuCustom();
 			break;
 		}
+		case 0:{
+			cout << "Da thoat."<<endl;
+			break;
+		}
 		default:
                 cout << "Lua chon khong hop le. Vui long nhap lai." << endl;
 	}
+	}while (chon!=0);
 }
