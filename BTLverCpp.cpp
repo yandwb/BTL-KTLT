@@ -3,6 +3,8 @@
 #include<fstream>
 #include<iomanip>
 using namespace std;
+bool MatKhauAdmin();
+void menuAdmin();
 //lop Date
 class Date{
 	int ngay;
@@ -161,13 +163,7 @@ public:
 		return _LaiThu;
 	}
 	
-	bool operator==(const SanPham& b)const{
-		if(ma.compare(b.ma) == 0)
-			return 1;
-		else return 0;
-	}
-
-	friend class DSSP;
+	//friend class DSSP;
 };
 //lop danh sach san pham
 class DSSP{
@@ -249,13 +245,6 @@ public:
     }
     friend class SanPham;
     void timKiemSanPhamTheoTen(const string _ten) {
-    	cout<<setw(5)<<left<<"Ma"<<"\t";
-		cout<<setw(15)<<left<<"Ten san pham"<<"\t";
-		cout<<setw(20)<<left<<"Gia nhap san pham(VND)"<<"\t";
-		cout<<setw(20)<<left<<"Gia ban san pham(VND)"<<"\t";
-		cout<<setw(25)<<left<<"Ngay san xuat"<<"\t";
-		cout<<setw(25)<<left<<"Han su dung"<<"\t";
-		cout<<setw(15)<<left<<"Danh Muc"<<endl;
 	    int timThay = 0; 
 	    for (int i = 0; i < n; i++) {
 	    	string s=data[i].getName();
@@ -268,15 +257,8 @@ public:
 	        cout<<"\nKhong co san pham nao co ten "<<_ten<<" trong danh sach.\n";
 	    }
 	}
-	//Hï¿½m tï¿½m ki?m s?n ph?m theo mï¿½
+	//Hàm tìm ki?m s?n ph?m theo mã
 	void timKiemSanPhamTheoMa(const string _ma) {
-		cout<<setw(5)<<left<<"Ma"<<"\t";
-		cout<<setw(15)<<left<<"Ten san pham"<<"\t";
-		cout<<setw(20)<<left<<"Gia nhap san pham(VND)"<<"\t";
-		cout<<setw(20)<<left<<"Gia ban san pham(VND)"<<"\t";
-		cout<<setw(25)<<left<<"Ngay san xuat"<<"\t";
-		cout<<setw(25)<<left<<"Han su dung"<<"\t";
-		cout<<setw(15)<<left<<"Danh Muc"<<endl;
 	    int timThay = 0;
 	    for (int i = 0; i < n; i++) {
 	    	string s=data[i].getID();
@@ -291,13 +273,6 @@ public:
 	}
 		//tim kiem theo danh muc
 	void timKiemSanPhamTheoDanhMuc(const string _danhMuc ){
-		cout<<setw(5)<<left<<"Ma"<<"\t";
-		cout<<setw(15)<<left<<"Ten san pham"<<"\t";
-		cout<<setw(20)<<left<<"Gia nhap san pham(VND)"<<"\t";
-		cout<<setw(20)<<left<<"Gia ban san pham(VND)"<<"\t";
-		cout<<setw(25)<<left<<"Ngay san xuat"<<"\t";
-		cout<<setw(25)<<left<<"Han su dung"<<"\t";
-		cout<<setw(15)<<left<<"Danh Muc"<<endl;
 	    int timThay = 0;
 	    for (int i = 0; i < n; i++) {
 	    	string s=data[i].getDanhMuc();
@@ -310,7 +285,7 @@ public:
 	        cout<<"\nKhong co san pham nao co ma "<<_danhMuc<<" trong danh sach.\n";
 	    }
 	}
-    //Nhap so luong san pham ban ra tu file
+    //Nhap so luong san pham ban ra sau do luu vao file
   	void NhapSoLuongBan(){
   		ofstream ofs("SOLUONGBANRA.txt");
   		for (int i=0;i<n;i++)
@@ -324,7 +299,7 @@ public:
   		ofs.close();
 	  }
 	
-	//Tinh tien lai thu duoc cua tung san pham
+	//Tinh tien lai thu duoc cua tung san pham (lay du lieu tu file)
 	void LaiTungSP(){
 		ifstream ifs("SOLUONGBANRA.txt");
 		for (int i=0;i<n;i++)
@@ -434,6 +409,13 @@ void menuAdmin(){
             	string _ten;
             	cout<<"Nhap ten san pham can tim: ";
             	cin>>_ten;
+            	cout<<setw(5)<<left<<"Ma"<<"\t";
+				cout<<setw(15)<<left<<"Ten san pham"<<"\t";
+				cout<<setw(20)<<left<<"Gia nhap san pham(VND)"<<"\t";
+				cout<<setw(20)<<left<<"Gia ban san pham(VND)"<<"\t";
+				cout<<setw(25)<<left<<"Ngay san xuat"<<"\t";
+				cout<<setw(25)<<left<<"Han su dung"<<"\t";
+				cout<<setw(15)<<left<<"Danh Muc"<<endl;
             	sp.timKiemSanPhamTheoTen(_ten);
 				break;
 			}
@@ -441,6 +423,13 @@ void menuAdmin(){
 				string _ma;
             	cout<<"Nhap ma san pham can tim: ";
             	cin>>_ma;
+            	cout<<setw(5)<<left<<"Ma"<<"\t";
+				cout<<setw(15)<<left<<"Ten san pham"<<"\t";
+				cout<<setw(20)<<left<<"Gia nhap san pham(VND)"<<"\t";
+				cout<<setw(20)<<left<<"Gia ban san pham(VND)"<<"\t";
+				cout<<setw(25)<<left<<"Ngay san xuat"<<"\t";
+				cout<<setw(25)<<left<<"Han su dung"<<"\t";
+				cout<<setw(15)<<left<<"Danh Muc"<<endl;
             	sp.timKiemSanPhamTheoMa(_ma);
 				break;
 			}
@@ -448,6 +437,13 @@ void menuAdmin(){
 				string _danhMuc;
             	cout<<"Nhap danh muc san pham can tim: ";
             	cin>>_danhMuc;
+            	cout<<setw(5)<<left<<"Ma"<<"\t";
+				cout<<setw(15)<<left<<"Ten san pham"<<"\t";
+				cout<<setw(20)<<left<<"Gia nhap san pham(VND)"<<"\t";
+				cout<<setw(20)<<left<<"Gia ban san pham(VND)"<<"\t";
+				cout<<setw(25)<<left<<"Ngay san xuat"<<"\t";
+				cout<<setw(25)<<left<<"Han su dung"<<"\t";
+				cout<<setw(15)<<left<<"Danh Muc"<<endl;
             	sp.timKiemSanPhamTheoDanhMuc(_danhMuc);
 				break;
 			}
@@ -489,33 +485,11 @@ void menuAdmin(){
     } while (choose != 0);  
 	
 }
-void menuCustom(){
-	
-}
 int main(){
-	int chon;
-	do{
-	cout << "======= Ban muon =======";
-	cout << "\n1. Quan ly .  ";
-    cout << "\n2. Ban hang. ";
-    cout << "\n0. Thoat ";
-	cout << "\n======================"<<endl;
-	cin>>chon;
-	switch(chon){
-		case 1:{
-			if (MatKhauAdmin()) menuAdmin();
-			break;
+	int check=1;
+	while (check!=0)
+		if (MatKhauAdmin()) {
+			menuAdmin();
+			check = 0;
 		}
-		case 2:{
-			menuCustom();
-			break;
-		}
-		case 0:{
-			cout << "Da thoat."<<endl;
-			break;
-		}
-		default:
-                cout << "Lua chon khong hop le. Vui long nhap lai." << endl;
-	}
-	}while (chon!=0);
 }
