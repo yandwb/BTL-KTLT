@@ -161,7 +161,13 @@ public:
 		return _LaiThu;
 	}
 	
-	//friend class DSSP;
+	bool operator==(const SanPham& b)const{
+		if(ma.compare(b.ma) == 0)
+			return 1;
+		else return 0;
+	}
+
+	friend class DSSP;
 };
 //lop danh sach san pham
 class DSSP{
@@ -262,7 +268,7 @@ public:
 	        cout<<"\nKhong co san pham nao co ten "<<_ten<<" trong danh sach.\n";
 	    }
 	}
-	//Hàm tìm ki?m s?n ph?m theo mã
+	//Hï¿½m tï¿½m ki?m s?n ph?m theo mï¿½
 	void timKiemSanPhamTheoMa(const string _ma) {
 		cout<<setw(5)<<left<<"Ma"<<"\t";
 		cout<<setw(15)<<left<<"Ten san pham"<<"\t";
