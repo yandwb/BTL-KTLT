@@ -186,8 +186,7 @@ void Menu(){
         printf("\n9. Sap xep danh sach san pham theo gia nhap ");
         printf("\n10. Xoa san pham tu danh sach bang ma  ");
         printf("\n11. Nhap danh sach san pham tu file ");
-        printf("\n12. Xuat danh sach san pham vao file ");
-        printf("\n13. Them san pham vao ");
+        printf("\n12. Them san pham vao file ");
         printf("\n0. Thoat ");
         printf("\n================================================");
         printf("\n");
@@ -195,16 +194,14 @@ void Menu(){
         scanf("\n%d", &chon);
 
         switch(chon){
-            case 1:
-                    nhapDanhSachSanPham(sp, n);            
+            case 1: 
+                    nhapDanhSachSanPham(sp, n);
+                    xuatVaoFile(sp, n);
+                    printf("\nDa xuat danh sach vao file sanPham.bin!");
                     nhapPhimBatKy();
                     break;
             case 2: 
-                    if (n > 0) {
                     xuatDanhSachSanPham(sp, n);
-                    } else {
-                    printf("\nDanh sach san pham hien tai rong.\n");
-                    }
                     nhapPhimBatKy();
                     break;
             case 3: 
@@ -254,6 +251,7 @@ void Menu(){
                     break;
             case 10:    
                     xoaSanPhamTheoMa(sp,n);
+                    xuatVaoFile(sp, n);
                     nhapPhimBatKy();
                     break;   
             case 11: 
@@ -261,12 +259,9 @@ void Menu(){
                     printf("\nDa nhap danh sach san pham tu file.\n"); // Thông báo sau khi đọc xong
                     nhapPhimBatKy();
                     break;
-            case 12: 
-                    xuatVaoFile(sp, n);
-                    nhapPhimBatKy();
-                    break; 
-            case 13:
+            case 12:
                     themSanPhamVaoFile(sp, n);
+                    xuatVaoFile(sp, n);
                     nhapPhimBatKy();;
                     break;
         }
